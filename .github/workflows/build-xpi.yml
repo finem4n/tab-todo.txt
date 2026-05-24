@@ -14,13 +14,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install zip
-        run: sudo apt-get install -y zip
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zip
 
       - name: Build XPI
         run: |
           VERSION=${GITHUB_REF_NAME}
+          echo "Building version $VERSION"
           mkdir -p build
-          zip -r build/tab-todotxt-${VERSION}.xpi . \
+          zip -r "build/tab-todotxt-${VERSION}.xpi" . \
             -x "*.git*" \
             -x "*.github*" \
             -x "build/*"
@@ -29,4 +32,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: firefox-xpi
-          path: build/tab-todotxt-${GITHUB_REF_NAME}.xpi
+          path: build/tab-todotxt-${VERSION}.xpi

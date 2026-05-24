@@ -1,2 +1,2 @@
-# copy-tab-title-ff
-Firefox extension that allows to copy title and url with single shortcut. Useful for notetaking
+# Tab to Todo.txt
+A Firefox extension that lets you copy and format the current tab into a todo.txt entry with a single keyboard shortcut!

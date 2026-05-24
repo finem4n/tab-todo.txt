@@ -18,8 +18,9 @@ jobs:
 
   - name: Build XPI
   run: |
+    VERSION=${GITHUB_REF_NAME}
     mkdir build
-    zip -r build/tab-todotxt.xpi . \
+    zip -r build/tab-todotxt-${VERSION}.xpi . \
       -x "*.git*" \
       -x "*.github*" \
       -x "build/*"

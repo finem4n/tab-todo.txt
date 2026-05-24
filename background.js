@@ -14,7 +14,15 @@ browser.commands.onCommand.addListener(async () => {
 
   const tab = tabs[0];
 
-  console.log(tab.title);
-  console.log(tab.url);
-  navigator.clipboard.writeText(tab.title + " - url: " + tab.url);
+  const today = new Date();
+
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+
+  const formatted = `${year}-${month}-${day}`;
+
+  console.log(formatted);
+
+  navigator.clipboard.writeText(formatted + " " + tab.title + " @firefox " +  tab.url);
 });

@@ -9,24 +9,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-  steps:
-    - name: Checkout repo
-    uses: actions/checkout@v4
-    
-    - name: Install zip
-    run: sudo apt-get install -y zip
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-  - name: Build XPI
-  run: |
-    VERSION=${GITHUB_REF_NAME}
-    mkdir build
-    zip -r build/tab-todotxt-${VERSION}.xpi . \
-      -x "*.git*" \
-      -x "*.github*" \
-      -x "build/*"
+      - name: Install zip
+        run: sudo apt-get install -y zip
 
-  - name: Upload artifact
-  uses: actions/upload-artifact@v4
-  with:
-    name: firefox-xpi
-    path: build/tab-todotxt.xpi
+      - name: Build XPI
+        run: |
+          VERSION=${GITHUB_REF_NAME}
+          mkdir -p build
+          zip -r build/tab-todotxt-${VERSION}.xpi . \
+            -x "*.git*" \
+            -x "*.github*" \
+            -x "build/*"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: firefox-xpi
+          path: build/tab-todotxt-${GITHUB_REF_NAME}.xpi

@@ -5,6 +5,9 @@ on:
     tags:
       - "v*"
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,12 +25,21 @@ jobs:
         run: |
           VERSION=${GITHUB_REF_NAME}
           FILE="build/tab-todotxt-${VERSION}.xpi"
-          echo "FILE=$FILE" >> $GITHUB_ENV
-          mkdir -p build
-          zip -r "$FILE" . -x "*.git*" "*.github*" "build/*"
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+          echo "Building version: $VERSION"
+          echo "FILE=$FILE" >> $GITHUB_ENV
+
+          mkdir -p build
+
+          zip -r "$FILE" . \
+            -x "*.git*" \
+            -x "*.github*" \
+            -x "build/*" \
+
+      - name: Create GitHub Release and upload XPI
+        uses: softprops/action-gh-release@v2
         with:
-          name: firefox-xpi
-          path: ${{ env.FILE }}
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          generate_release_notes: true
+          files: ${{ env.FILE }}

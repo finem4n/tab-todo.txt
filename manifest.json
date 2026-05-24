@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
-  "name": "CopyTitleFF",
-  "version": "0.1",
+  "name": "Tab-Todo.txt",
+  "version": "1.0",
 
-  "description": "Firefox extension that allows to copy title and url with single shortcut. Useful for notetaking.",
+  "description": "A Firefox extension that lets you copy and format the current tab into a todo.txt entry with a single keyboard shortcut!",
 
   "background": {
     "scripts": ["background.js"]
@@ -14,7 +14,7 @@
       "suggested_key": {
         "default": "Ctrl+Y"
       },
-      "description": "Copy title and url"
+      "description": "Copy title, url and format into a todo.txt entry."
     }
   },
 
